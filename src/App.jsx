@@ -5,14 +5,25 @@ import { useState } from "react";
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
   const [activePlayer, setActivePlayer] = useState("X");
-  function handleSquareSelect() {
+  function handleSquareSelect(rowIndex, colIndex) {
     setActivePlayer((currActivePlayer) =>
       currActivePlayer === "X" ? "O" : "X"
     );
+    //gameTurns
     setGameTurns((prevTurns) => {
-      updatedTurns = [...prevTurns];
+      let currentPlayer = "X";
+      if (prevTurns.length > 0 && prevTurns[0].player === "X") {
+        currentPlayer = "O";
+      }
+      const updatedTurns = [
+        { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
+        ...prevTurns,
+      ];
+
+      return updatedTurns;
     });
   }
+
   return (
     <main>
       <div id="game-container">
@@ -30,10 +41,11 @@ function App() {
         </ol>
         <GameBoard
           onSelectSquare={handleSquareSelect}
-          activePlayerSymbol={activePlayer}
+          //
+          turns={gameTurns}
         />
       </div>
-      <Log />
+      <Log turns={gameTurns} />
     </main>
   );
 }

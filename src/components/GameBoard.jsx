@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 const initialGameBoard = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
 ];
 
 // console.log(initialGameBoard, "OG Array");
@@ -17,8 +17,8 @@ export default function GameBoard({
     const { square, player } = turn;
     const { row, col } = square;
     gameBoard[row][col] = player;
-    console.log(gameBoard);
   }
+  console.log(gameBoard);
   //   const [gameBoard, setGameBoard] = useState(initialGameBoard);
   //   function handelSelectedButton(rowI, colI) {
   //     setGameBoard((prevGameBoard) => {
@@ -37,7 +37,10 @@ export default function GameBoard({
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => onSelectSquare(rowIndex, colIndex)}>
+                <button
+                  onClick={() => onSelectSquare(rowIndex, colIndex)}
+                  disabled={playerSymbol !== null}
+                >
                   {playerSymbol}
                 </button>
               </li>

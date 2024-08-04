@@ -1,24 +1,11 @@
 import { useState } from "react";
 
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
 // console.log(initialGameBoard, "OG Array");
 export default function GameBoard({
   onSelectSquare,
-  activePlayerSymbol,
-  turns,
+  //   activePlayerSymbol,
+  gameBoard,
 }) {
-  let gameBoard = initialGameBoard;
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-    gameBoard[row][col] = player;
-  }
-  console.log(gameBoard);
   //   const [gameBoard, setGameBoard] = useState(initialGameBoard);
   //   function handelSelectedButton(rowI, colI) {
   //     setGameBoard((prevGameBoard) => {

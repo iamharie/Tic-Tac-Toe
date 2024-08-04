@@ -3,6 +3,12 @@ import GameBoard from "./components/GameBoard.jsx";
 import Log from "./components/Log.jsx";
 import { useState } from "react";
 
+const initialGameBoard = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
+
 function derivedState(gameTurns) {
   let currentPlayer = "X";
   if (gameTurns.length > 0 && gameTurns[0].player === "X") {
@@ -15,6 +21,13 @@ function App() {
   const [gameTurns, setGameTurns] = useState([]);
   // const [activePlayer, setActivePlayer] = useState("X");
   let activePlayer = derivedState(gameTurns);
+
+  let gameBoard = initialGameBoard;
+  for (const turn of gameTurns) {
+    const { square, player } = turn;
+    const { row, col } = square;
+    gameBoard[row][col] = player;
+  }
 
   function handleSquareSelect(rowIndex, colIndex) {
     // setActivePlayer((currActivePlayer) =>
@@ -50,7 +63,7 @@ function App() {
         <GameBoard
           onSelectSquare={handleSquareSelect}
           //
-          turns={gameTurns}
+          gameBoard={gameBoard}
         />
       </div>
       <Log turns={gameTurns} />

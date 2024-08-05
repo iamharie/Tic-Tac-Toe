@@ -1,6 +1,3 @@
-import { useState } from "react";
-
-// console.log(initialGameBoard, "OG Array");
 export default function GameBoard({
   onSelectSquare,
   //   activePlayerSymbol,
